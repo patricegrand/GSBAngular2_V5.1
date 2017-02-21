@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { DataService} from '../services/app.service.data';
 @Component({
   moduleId: module.id,
   selector: 'my-connexion',
@@ -14,26 +17,24 @@ export class ConnexionComponent {
    mdp : string;
    estCache : boolean = true;
    lblMessage : string = "";
+   visiteur : any;
 
-
-   valider() : void{
-          if(this.login != "toto" || this.mdp !="titi"){
-            this.lblMessage ="erreur"; 
-            this.estCache = false;
-          }
-          else{
-              this.lblMessage =""; 
-              this.estCache = true;
-
-          }
-           
+   constructor(private router : Router,private dataService : DataService){}
+  valider():void{
+            this.dataService.connexion(this.login,this.mdp)
+                                  .subscribe( 
+                                      (data)=>{this.visiteur = data;
+                                         this.router.navigate(['accueil']);}
+                                      ,(error)=>{this.estCache = false;
+                                               this.lblMessage = "erreur";}
+                                              );
+      }  
 
 
 
 
    }
    
-}
 
 
 

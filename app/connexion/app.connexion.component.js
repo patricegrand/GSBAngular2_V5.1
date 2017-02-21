@@ -5,9 +5,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var app_service_data_1 = require("../services/app.service.data");
 var ConnexionComponent = (function () {
-    function ConnexionComponent() {
+    function ConnexionComponent(router, dataService) {
+        this.router = router;
+        this.dataService = dataService;
         this.titre = "Connexion";
         this.lblLogin = "Login";
         this.lblMdp = "Mot de passe";
@@ -15,14 +22,15 @@ var ConnexionComponent = (function () {
         this.lblMessage = "";
     }
     ConnexionComponent.prototype.valider = function () {
-        if (this.login != "toto" || this.mdp != "titi") {
-            this.lblMessage = "erreur";
-            this.estCache = false;
-        }
-        else {
-            this.lblMessage = "";
-            this.estCache = true;
-        }
+        var _this = this;
+        this.dataService.connexion(this.login, this.mdp)
+            .subscribe(function (data) {
+            _this.visiteur = data;
+            _this.router.navigate(['accueil']);
+        }, function (error) {
+            _this.estCache = false;
+            _this.lblMessage = "erreur";
+        });
     };
     return ConnexionComponent;
 }());
@@ -32,7 +40,8 @@ ConnexionComponent = __decorate([
         selector: 'my-connexion',
         templateUrl: 'app.connexion.html',
         styleUrls: ['app.connexion.css'],
-    })
+    }),
+    __metadata("design:paramtypes", [router_1.Router, app_service_data_1.DataService])
 ], ConnexionComponent);
 exports.ConnexionComponent = ConnexionComponent;
 //# sourceMappingURL=app.connexion.component.js.map
