@@ -33,7 +33,6 @@ export class VisitesComponent {
   messageEnregistrement : string =""
   typeMessage : string ="";
   constructor(private dataService : DataService, private router : Router ){
-
   }
   chargerMedecins(){
      this.dataService.chargerMedecins(this.nomMedecin)

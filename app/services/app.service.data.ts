@@ -11,7 +11,6 @@ export class DataService {
     ticket : string;
     constructor(private http: Http, private sha1Service : Sha1Service) {}
 
-   
     public login(loginIn : string) : Observable<string>{
         let url :string = this.urlDomaine + "/login?login=" + loginIn;
         let req = this.http

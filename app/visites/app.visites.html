@@ -29,8 +29,6 @@
         </ul>
     </div>
 
-
-
     <!--formulaire de MAJ du rapport-->
     <form class="col-lg-6" name="frmRapport" *ngIf="afficherRapport" (ngSubmit)="valider()">
         <div class="form-group">
@@ -107,8 +105,8 @@
                         <div class="form-group">
                             <label for="qteSelect"> Quantité</label>
                             <select [(ngModel)]="qteSelect" class="form-control" name="qteSelect">
-                                <option   *ngFor="let qte of qtes " 
-                                            value="{{qte}}" >{{qte}}</option>
+                                <option   *ngFor = "let qte of qtes " 
+                                            value = "{{qte}}" >{{qte}}</option>
                             </select>
                         </div>
                     </td>
