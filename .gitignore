@@ -1,1 +1,4 @@
 /NodeJsWebApplication/nbproject/private/
+*.map
+*.js 
+/node_modules
